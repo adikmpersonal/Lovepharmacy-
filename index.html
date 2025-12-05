@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Love Pharmacy 💊</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #ffe4e6;
+            background-image: radial-gradient(#fda4af 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px -5px rgba(255, 50, 50, 0.15);
+        }
+        .pill-button {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .pill-button:active {
+            transform: scale(0.95);
+        }
+        .prescription-paper {
+            background-image: repeating-linear-gradient(transparent, transparent 29px, #e5e7eb 30px);
+            line-height: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .heart-beat {
+            animation: heartbeat 1.5s infinite;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+        
+        /* Call Screen Animation */
+        .ripple-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            animation: ripple 2s infinite;
+            z-index: 0;
+        }
+        .ripple:nth-child(1) { animation-delay: 0s; }
+        .ripple:nth-child(2) { animation-delay: 0.6s; }
+        
+        @keyframes ripple {
+            0% { width: 100%; height: 100%; opacity: 0.8; transform: scale(1); }
+            100% { width: 100%; height: 100%; opacity: 0; transform: scale(1.8); }
+        }
+
+        /* Profile Photo Styling */
+        .profile-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main Container -->
+    <div class="glass-panel w-full max-w-md rounded-3xl overflow-hidden relative z-10">
+        
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-rose-400 to-pink-500 p-6 text-white text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10">
+                <i class="fas fa-capsules text-6xl absolute -top-2 -left-2 transform rotate-45"></i>
+                <i class="fas fa-heartbeat text-6xl absolute -bottom-2 -right-2"></i>
+            </div>
+            <div class="relative z-10">
+                <div class="text-4xl mb-2 heart-beat">🏥</div>
+                <h1 class="text-2xl font-extrabold tracking-wide">LOVE PHARMACY</h1>
+                <p class="text-rose-100 text-sm mt-1">Authorized Pharmacist: Adi ❤️</p>
+                <div class="mt-4 bg-white/20 rounded-full py-1 px-4 inline-block text-xs font-bold backdrop-blur-sm">
+                    OPEN 24/7 • UNLIMITED REFILLS
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="p-6">
+            
+            <!-- Patient Info -->
+            <div class="flex items-center space-x-3 mb-6 bg-rose-50 p-3 rounded-xl border border-rose-100">
+                <div class="bg-rose-200 w-10 h-10 rounded-full flex items-center justify-center text-rose-600">
+                    <i class="fas fa-user-nurse"></i>
+                </div>
+                <div>
+                    <p class="text-xs text-rose-400 font-bold uppercase">Patient Name</p>
+                    <p class="text-gray-800 font-bold">Shibi kutty 💕</p>
+                </div>
+            </div>
+
+            <!-- Symptom Selector -->
+            <div id="symptom-view">
+                <h2 class="text-gray-700 font-bold mb-4 flex items-center">
+                    <i class="fas fa-stethoscope text-rose-400 mr-2"></i> Select Symptoms:
+                </h2>
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="dispense('project')" class="pill-button bg-white border-2 border-slate-100 p-4 rounded-xl text-left hover:border-rose-400 hover:bg-rose-50 group">
+                        <div class="text-2xl mb-2">🤯</div>
+                        <div class="font-bold text-gray-700 text-sm group-hover:text-rose-500">Final Year Project Stress</div>
+                    </button>
+
+                    <button onclick="dispense('tired')" class="pill-button bg-white border-2 border-slate-100 p-4 rounded-xl text-left hover:border-blue-400 hover:bg-blue-50 group">
+                        <div class="text-2xl mb-2">🔋</div>
+                        <div class="font-bold text-gray-700 text-sm group-hover:text-blue-500">Low Energy / Tired</div>
+                    </button>
+
+                    <button onclick="dispense('miss')" class="pill-button bg-white border-2 border-slate-100 p-4 rounded-xl text-left hover:border-purple-400 hover:bg-purple-50 group">
+                        <div class="text-2xl mb-2">🥺</div>
+                        <div class="font-bold text-gray-700 text-sm group-hover:text-purple-500">Missing Adi</div>
+                    </button>
+
+                    <button onclick="dispense('panic')" class="pill-button bg-white border-2 border-slate-100 p-4 rounded-xl text-left hover:border-orange-400 hover:bg-orange-50 group">
+                        <div class="text-2xl mb-2">🌪️</div>
+                        <div class="font-bold text-gray-700 text-sm group-hover:text-orange-500">Overthinking Everything</div>
+                    </button>
+                </div>
+
+                <!-- Emergency Button -->
+                <button onclick="triggerEmergency()" class="w-full mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-green-200 transition transform active:scale-95 flex items-center justify-center space-x-2">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                    <span>Emergency Consult (Call Adi)</span>
+                </button>
+            </div>
+
+            <!-- Prescription View (Hidden by default) -->
+            <div id="prescription-view" class="hidden">
+                <div class="prescription-paper bg-white border-2 border-gray-200 rounded-xl p-5 relative min-h-[300px]">
+                    <!-- Rx Symbol -->
+                    <div class="text-6xl font-serif text-gray-100 absolute top-4 right-4 pointer-events-none italic">Rx</div>
+                    
+                    <div class="border-b-2 border-gray-800 pb-2 mb-4 flex justify-between items-end">
+                        <div>
+                            <p class="text-xs text-gray-500">Date</p>
+                            <p class="font-mono text-sm" id="rx-date">Today</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs text-gray-500">Licence No.</p>
+                            <p class="font-mono text-sm">ILY-3000</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-bold text-gray-800 text-lg flex items-center">
+                                <span class="text-rose-500 mr-2">💊</span> Prescribed Med:
+                            </h3>
+                            <p id="rx-med" class="text-gray-700 font-medium ml-6 text-lg">Hugs (Extended Release)</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold text-gray-800 text-sm flex items-center">
+                                <span class="text-blue-500 mr-2">🧪</span> Mechanism of Action:
+                            </h3>
+                            <p id="rx-action" class="text-gray-600 text-sm ml-6 leading-snug">Increases dopamine levels immediately.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold text-gray-800 text-sm flex items-center">
+                                <span class="text-green-500 mr-2">📝</span> Doctor's Note:
+                            </h3>
+                            <p id="rx-note" class="text-gray-600 text-sm ml-6 italic leading-snug">"You are doing great."</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-4 border-t border-dashed border-gray-300 text-center">
+                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Ad&backgroundColor=fda4af" class="w-12 h-12 rounded-full mx-auto mb-2 opacity-80" alt="Signature">
+                        <p class="font-cursive text-gray-400 text-sm">Signature of Dr. Adi ❤️</p>
+                    </div>
+                </div>
+
+                <button onclick="resetApp()" class="w-full mt-4 bg-gray-800 text-white font-bold py-3 rounded-xl hover:bg-gray-900 transition">
+                    <i class="fas fa-redo-alt mr-2"></i> New Prescription
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Incoming Call Overlay (Hidden) -->
+    <div id="call-overlay" class="fixed inset-0 bg-gray-900/95 z-50 hidden flex-col items-center justify-between py-12 text-white backdrop-blur-sm">
+        <div class="text-center mt-6 w-full">
+            
+            <!-- PHOTO CONTAINER -->
+            <div class="ripple-container w-48 h-48 mx-auto mb-6">
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+                <!-- 
+                     IMPORTANT FOR GITHUB: 
+                     Ensure you upload a file named 'us.jpg' in the same repository folder.
+                -->
+                <img src="us.jpg" 
+                     onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=AdiLove&backgroundColor=b6e3f4'" 
+                     alt="Adi and Shibi" 
+                     class="profile-photo">
+            </div>
+
+            <h2 class="text-3xl font-bold">Dr. Adi ❤️</h2>
+            <p class="text-rose-300 animate-pulse mt-2 font-semibold">Incoming Emergency Video Call...</p>
+        </div>
+
+        <div class="w-full px-12 pb-16">
+            <div class="flex justify-around items-center">
+                <button onclick="closeCall()" class="bg-red-500/80 hover:bg-red-600 w-16 h-16 rounded-full flex items-center justify-center text-2xl shadow-lg transition backdrop-blur-md transform active:scale-95">
+                    <i class="fas fa-phone-slash transform rotate-[135deg]"></i>
+                </button>
+                <button onclick="acceptCall()" class="bg-green-500 hover:bg-green-600 w-20 h-20 rounded-full flex items-center justify-center text-3xl shadow-lg animate-bounce transition transform active:scale-95">
+                    <i class="fas fa-phone"></i>
+                </button>
+            </div>
+            <p class="text-center mt-8 text-sm text-white/60">Tap Green to Accept</p>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        // OPTIONAL: Put your phone number here inside the quotes (e.g., "919876543210")
+        const ADI_PHONE_NUMBER = ""; 
+        // ---------------------
+
+        const pharmacyData = {
+            project: [
+                {
+                    med: "Anti-Panicol 500mg",
+                    action: "Selectively binds to 'The Project is Impossible' receptors and blocks them.",
+                    note: "Side effects: Realizing Shibi kutty is actually brilliant and fully capable of passing this course."
+                },
+                {
+                    med: "Focus-Plus Syrup",
+                    action: "Increases concentration and decreases the urge to throw the laptop.",
+                    note: "Remember: It's just a project, and you are a future pharmacist. You eat chemistry for breakfast!"
+                },
+                {
+                    med: "Chillaxin Tablet",
+                    action: "Reduces cortisol caused by thesis formatting issues.",
+                    note: "Take a deep breath. One step at a time. Adi is so proud of how hard you are working."
+                }
+            ],
+            tired: [
+                {
+                    med: "Caffeine & Cuddles IV",
+                    action: "Restores ATP levels in the mitochondria of the heart.",
+                    note: "Prescription: Close your eyes for 5 mins. Imagine Adi massaging your shoulders. Now get back to it!"
+                },
+                {
+                    med: "Nap-roxen Sodium",
+                    action: "Induces guilt-free relaxation.",
+                    note: "You are working too hard. Tonight, your only homework is to eat good food and sleep."
+                }
+            ],
+            miss: [
+                {
+                    med: "Virtual Vitamin U",
+                    action: "Treats acute deficiency of 'Adi'.",
+                    note: "Warning: High risk of addiction. I miss you too. I'm counting down the seconds until I see you."
+                },
+                {
+                    med: "Oxytocin Booster",
+                    action: "Stimulates love hormones remotely.",
+                    note: "Just a reminder: Shibi kutty is my favorite person in the entire world."
+                }
+            ],
+            panic: [
+                {
+                    med: "Perspective Pills",
+                    action: "Corrects distorted thoughts about failure.",
+                    note: "You have survived 100% of your bad days so far. You will ace this one too."
+                },
+                {
+                    med: "Self-Belief Statins",
+                    action: "Lowers bad vibes, raises good vibes.",
+                    note: "Look at how far you've come in your MPharm! Don't stop now."
+                }
+            ]
+        };
+
+        function dispense(symptom) {
+            const options = pharmacyData[symptom];
+            const result = options[Math.floor(Math.random() * options.length)];
+
+            document.getElementById('rx-med').innerText = result.med;
+            document.getElementById('rx-action').innerText = result.action;
+            document.getElementById('rx-note').innerText = `"${result.note}"`;
+            
+            const now = new Date();
+            document.getElementById('rx-date').innerText = now.toLocaleDateString();
+
+            document.getElementById('symptom-view').classList.add('hidden');
+            document.getElementById('prescription-view').classList.remove('hidden');
+            
+            document.querySelector('.glass-panel').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetApp() {
+            document.getElementById('prescription-view').classList.add('hidden');
+            document.getElementById('symptom-view').classList.remove('hidden');
+        }
+
+        // --- Emergency Call Logic ---
+        
+        function triggerEmergency() {
+            // Show the "Call Screen" overlay
+            document.getElementById('call-overlay').classList.remove('hidden');
+            document.getElementById('call-overlay').classList.add('flex');
+        }
+
+        function closeCall() {
+            document.getElementById('call-overlay').classList.add('hidden');
+            document.getElementById('call-overlay').classList.remove('flex');
+        }
+
+        function acceptCall() {
+            const text = "Doctor Adi! I need an emergency dose of love and attention immediately! 🚑❤️";
+            
+            let url = "";
+            if (ADI_PHONE_NUMBER) {
+                url = `https://api.whatsapp.com/send?phone=${ADI_PHONE_NUMBER}&text=${encodeURIComponent(text)}`;
+            } else {
+                url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+            }
+            
+            window.open(url, '_blank');
+            closeCall();
+        }
+    </script>
+</body>
+</html>
+
